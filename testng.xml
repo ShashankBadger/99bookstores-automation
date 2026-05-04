@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="99BookstoresAutomationSuite">
+	<listeners>
+	    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+	</listeners>
+  <test thread-count="5" name="99BookstoresAutomationTest">
+    <classes>
+      <class name="tests.HomePageTest"/>
+      <class name="tests.ProductCategoriesTest"/>
+    </classes>
+  </test> <!-- 99BookstoresAutomationTest -->
+</suite> <!-- 99BookstoresAutomationSuite -->

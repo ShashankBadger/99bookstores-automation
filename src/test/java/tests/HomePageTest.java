@@ -33,13 +33,4 @@ public class HomePageTest extends BaseTest {
 		
 	}
 	
-	@Test(priority = 2)
-	public void test() {
-		log.info("Test1 open");
-		ProductCategories productCategories = new ProductCategories(driver, wait);
-		productCategories.verifyProductCategoriesTab();
-		productCategories.verifyCollectionListTab();
-		productCategories.verifyFilter();
-	}
-	
 }
