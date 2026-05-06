@@ -4,11 +4,21 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import pages.HomePage;
-import pages.ProductCategories;
 
 public class HomePageTest extends BaseTest {
 	
+	@Epic("Home Page")
+	@Feature("Home Page UI Validation")
+	@Story("Verify important UI elements are visible on Home Page")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Verifies that Home Page loads successfully and key UI elements such as logo, search bar, sale banner, and cart icon are displayed correctly.")
 	@Test(priority = 1, enabled = true)
 	public void verifyHomePageElements() {
 		
@@ -30,7 +40,6 @@ public class HomePageTest extends BaseTest {
         log.info("Verified cart icon is displayed");
 
         log.info("Home Page validation test completed");
-		
 	}
 	
 }

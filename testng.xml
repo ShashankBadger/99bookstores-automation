@@ -5,7 +5,8 @@
 	    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
 	</listeners>
   <test thread-count="5" name="99BookstoresAutomationTest">
-    <classes>
+    <classes>  
+      
       <class name="tests.HomePageTest"/>
       <class name="tests.ProductCategoriesTest"/>
     </classes>

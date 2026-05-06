@@ -6,17 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 
 public class ProductCategories {
 
@@ -51,9 +47,20 @@ public class ProductCategories {
 	@FindBy(tagName = "body")
 	WebElement bodyElement;
 	
+	@FindBy(xpath = "//span[text()='Price']/ancestor::summary[contains(@class,'caption-large' )]")
+	WebElement priceFilterElement;
 
-	@FindBy(xpath = "//ul[@id='product-grid']//li")
-	List<WebElement> productList;
+	@FindBy(id = "Filter-Price-GTE")
+	WebElement filterPriceGTEElement;
+	
+	@FindBy(id = "Filter-Price-LTE")
+	WebElement filterPriceLTEElement;
+	
+	@FindBy(xpath = "//span[contains(text(),'Remove all')]/parent::a[contains(@href,'/collections/fiction')]")
+	WebElement removeAllFilterLink;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Out of stock')]/ancestor::li")
+	WebElement outOfStockElement;
 
 	public void verifyProductCategoriesTab() {
 		
@@ -81,59 +88,151 @@ public class ProductCategories {
 		Assert.assertEquals(title, "Fiction – 99Bookstore", "Page is not open");
 	}
 	
-	public void verifyFilter() {
+	public void verifyAvailabiltyFilterElement() {
 		
+		log.info("clicking Availability filter");
 		wait.until(ExpectedConditions.elementToBeClickable(availabilityFilterElement)).click();
+	}
+	
+	public void verifyInStockFilter() {
 		
 		log.info("Applying Availability filter: In Stock");
 		wait.until(ExpectedConditions.elementToBeClickable(inStockElement)).click();
 		
-		actionsClickOutside();
-				
+		refreshPageAfterFilterUpdate("filter.v.availability=1");
+								
+	}
+	
+	public void applySortHighToLowByURL() {
+		
 		log.info("Applying Sort By: Price high to low");
-		sortHighToLowByURL();
+		
+		String currentUrl = driver.getCurrentUrl();
+		
+		currentUrl = currentUrl.replaceAll("sort_by=[^&]*", "");
+		
+		String updatedUrl = currentUrl + "sort_by=price-descending";
+		
+		driver.get(updatedUrl);
+		
+		log.info("Sorting applied successfully");
+	    
+	}
+	
+	public void getProductListDetails() {
+
+		List<WebElement> products = getFreshProductList();
+		log.info("Total products in DOM: {}", products.size());
+		
+
+		for (int i = 0; i < Math.min(5, products.size()); i++) {
+		        String[] value = products.get(i).getText().split("\n");
+		        log.info(
+		            "Product details: Title: {} || Regular price: {} || Sale price: {}",
+		            value[1], value[3], value[5]
+		        );
+		 }
 		
 	}
 	
-	public void productListDetails() {
+	public void applyAndValidatePriceFilter(int lowPrice, int highPrice) {
 		
-		log.info("Total products displayed: {}", productList.size());
+		log.info("Opening Price filter");
+		priceFilterElement.click();
 		
-//		for(WebElement el : productList) {
-//			String value[] = el.getText().split("\n");
-//			log.info("Product details: Title: {} || Regular price: {} || Sale price: {}", value[1], value[3], value[5]);
-//		}
+		log.info("Entering minimum price: {}",lowPrice);
+		wait.until(ExpectedConditions.visibilityOf(filterPriceGTEElement)).sendKeys(""+lowPrice);
 		
-		for(int i = 0; i < 5; i++) {
+		log.info("Entering maximum price: {}", +highPrice);
+		wait.until(ExpectedConditions.visibilityOf(filterPriceLTEElement)).sendKeys(""+highPrice);
+		
+		log.info("Validating products are within price range {} to {}", lowPrice, highPrice);
+		boolean isBetweenPrice = productValidateBasedOnPrice(lowPrice, highPrice);
+		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
+		
+		log.info("Price range filter validation completed successfully");
+	}
+	
+	private boolean productValidateBasedOnPrice(int low, int high) {
+
+		refreshPageAfterFilterUpdate("filter.v.price.gte="+low+"&filter.v.price.lte="+high);
+		
+		List<WebElement> products = driver.findElements(By.className("price-item--sale"));
+		
+		for(WebElement element : products) {
+			double salePrice = Double.parseDouble(
+    	            		element.getText()
+    	            		.replace("Rs.", "")
+    	            		.replaceAll("[^0-9.]", "")
+    	        );
 			
-			String value[] = productList.get(i).getText().split("\n");
-			log.info("Product details: Title: {} || Regular price: {} || Sale price: {}", value[1], value[3], value[5]);
+			if (salePrice < low || salePrice > high) {
+	            log.warn("Out of range price: {}", salePrice);
+	            return false;
+	        }
 		}
 		
+	    return true;
 	}
 	
-
-	private void actionsClickOutside() {
+	private List<WebElement> getFreshProductList() {
 		
-		log.info("Closing filter dropdown by pressing ESC");
-	    Actions actions = new Actions(driver);
-	    actions.sendKeys(Keys.ESCAPE).perform();
-	    
+	    return wait.until(
+	        ExpectedConditions.presenceOfAllElementsLocatedBy(
+	            By.xpath("//ul[@id='product-grid']//li")
+	        )
+	    );
 	}
 	
-	public void sortHighToLowByURL() {
+	public void clickAndValidateRemoveAllFilter() {
 		
-	    String currentUrl = driver.getCurrentUrl();
+		WebElement removeAllElement =
+		            wait.until(ExpectedConditions.elementToBeClickable(removeAllFilterLink));
+		
+		log.info("Clicking 'Remove All Filters' to clear all applied filters");
+		
+		removeAllElement.click();
 
-	    if (!currentUrl.contains("sort_by=price-descending")) {
-	        driver.get(currentUrl + (currentUrl.contains("?") ? "&" : "?")
-	                + "filter.v.availability=1&filter.v.price.gte=&filter.v.price.lte=&sort_by=price-descending");
-	    }
-
-	    wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-	            By.xpath("//ul[@id='product-grid']//li")));
-	    
 	}
+	
+	public void verifyOutOfStockFilter() {
+		
+		log.info("Applying Availability filter: Out of Stock");
+		wait.until(ExpectedConditions.elementToBeClickable(outOfStockElement)).click();
+		
+		refreshPageAfterFilterUpdate("filter.v.availability=0");
+		
+	}
+	
+	public void productValidateBasedOutOfStock() {
+		
+		log.info("Validating that all displayed products are marked as 'Sold out'");
+		
+		List<WebElement> soldOut = driver.findElements(By.xpath("//span[text()='Sold out' and contains(@id, 'No')]"));
+		
+		boolean isItContainsSoldOutProd = true;
+		
+		for(WebElement el : soldOut) {
+			String soldOutElementText = el.getText();
+			if(!soldOutElementText.equalsIgnoreCase("Sold out")) {
+				isItContainsSoldOutProd = false;
+				break;
+			}
+		}
+		
+		log.info("Out-of-stock product validation result: {}", isItContainsSoldOutProd);
+		
+		Assert.assertTrue(isItContainsSoldOutProd, "The list contains in-stock products as well");
+	}
+	
+	
+	private void refreshPageAfterFilterUpdate(String expectedUrlPart) {
 
-
+		wait.until(ExpectedConditions.urlContains(expectedUrlPart));
+		String updatedUrl = driver.getCurrentUrl();
+		log.info("Closing filter dropdown by refressing the webpage");
+		driver.get(updatedUrl);
+		
+	}
+	
 }
