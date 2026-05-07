@@ -1,4 +1,4 @@
-package base;
+package tests;
 
 import java.time.Duration;
 
@@ -14,9 +14,9 @@ import utils.ConfigReader;
 
 public class BaseTest {
 	
-	protected WebDriver driver;
-	protected WebDriverWait wait;
-	protected static Logger log = LogManager.getLogger(BaseTest.class);
+	WebDriver driver;
+	WebDriverWait wait;
+	static Logger log = LogManager.getLogger(BaseTest.class);
 	
 	@BeforeMethod
 	public void setup() {
