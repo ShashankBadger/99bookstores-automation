@@ -36,7 +36,7 @@
 
     <!-- SUPPRESS SELENIUM NOISE -->
     <Logger name="org.openqa.selenium" level="warn"/>
-    <Logger name="org.testng" level="warn"/>
+    <Logger name="org.testng" level="error"/>
     <Logger name="org.apache" level="warn"/>
 
     <Root level="info">
