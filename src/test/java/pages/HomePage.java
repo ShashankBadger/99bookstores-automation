@@ -35,7 +35,6 @@ public class HomePage {
         return logo.isDisplayed();
     }
     
-
     public boolean isSearchBarDisplayed() {
         return searchBar.isDisplayed();
     }
