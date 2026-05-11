@@ -41,4 +41,40 @@ public class HomePageTest extends BaseTest {
         log.info("Home Page validation test completed");
 	}
 	
+	@Test
+	public void verifyAllNavigationWorks() {
+		
+		HomePage homePage = new HomePage(driver, wait);
+
+		log.info("Verifying Product Categories tab...");
+        homePage.verifyProductCategoriesTab();
+        log.info("Product Categories tab verified successfully.");
+
+        log.info("Verifying Bulk Purchase tab...");
+        homePage.verifyBulkPurchaseTab();
+        log.info("Bulk Purchase tab verified successfully.");
+
+        log.info("Verifying About Us tab...");
+        homePage.verifyAboutUsTab();
+        log.info("About Us tab verified successfully.");
+
+        log.info("Verifying Return and Replacement tab...");
+        homePage.verifyReturnAndReplacementTab();
+        log.info("Return and Replacement tab verified successfully.");
+
+        log.info("Verifying Contact Us tab...");
+        homePage.verifyContactUsTab();
+        log.info("Contact Us tab verified successfully.");
+
+        log.info("Verifying Terms and Conditions tab...");
+        homePage.verifyTermsAndConditionsTab();
+        log.info("Terms and Conditions tab verified successfully.");
+
+        log.info("Verifying Privacy Policy tab...");
+        homePage.verifyPrivacyPolicyTab();
+        log.info("Privacy Policy tab verified successfully.");
+
+        log.info("All navigation menu items verified successfully.");
+	}
+	
 }
