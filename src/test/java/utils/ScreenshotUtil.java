@@ -5,11 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtil {
+	
+	static Logger log = LogManager.getLogger(ScreenshotUtil.class);
+	
 	public static void captureSceeenshot(WebDriver driver, String folder) {
 		
 		try {
@@ -23,12 +28,13 @@ public class ScreenshotUtil {
 			
 			FileUtils.copyFile(src, new File(path));
 			
-			System.out.println("INFO: Screenshot saved at -> " + path);
+			log.info("INFO: Screenshot saved at -> {}", path);
 			
 		} catch (Exception e) {
 			
-			System.out.println("ERROR: Failed to capture screenshot");
+			log.error("ERROR: Failed to capture screenshot");
 			e.printStackTrace();
+			
 		}
 	}
 }
