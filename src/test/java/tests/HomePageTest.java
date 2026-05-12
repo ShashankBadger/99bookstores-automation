@@ -50,7 +50,6 @@ public class HomePageTest extends BaseTest {
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify that all navigation tabs on the Home Page work correctly.")
 	@Test(priority = 2, enabled = true)
-	
 	public void verifyAllNavigationWorks() {
 		
 		HomePage homePage = new HomePage(driver, wait);
@@ -89,7 +88,6 @@ public class HomePageTest extends BaseTest {
         homePage.verifyPrivacyPolicyTab();
         ScreenshotUtil.captureSceeenshot(driver, "Home");
         log.info("Privacy Policy tab verified successfully.");
-        homePage.businessAndFinanceTab();
 
         log.info("All navigation menu items verified successfully.");
 	}
@@ -99,7 +97,7 @@ public class HomePageTest extends BaseTest {
 	@Story("Verify Business & Finance tab navigation")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Ensures that clicking on the Business & Finance tab loads the correct product category list.")
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 2, enabled = true)
 	public void verifyBusinessAndFinance() {
 	    log.info("Starting Business & Finance tab verification...");
 
@@ -122,7 +120,7 @@ public class HomePageTest extends BaseTest {
 	@Story("Verify Mythology tab navigation")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Ensures that clicking on the Mythology tab loads the correct product category list.")
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 2, enabled = true)
 	public void verifyMythology() {
 	    log.info("Starting Mythology tab verification...");
 
