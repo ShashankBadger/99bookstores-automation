@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -127,9 +129,20 @@ public class ProductCategories {
 
 		for (int i = 0; i < Math.min(5, products.size()); i++) {
 		        String[] value = products.get(i).getText().split("\n");
+		        List<String> listValue = new ArrayList<>(Arrays.asList(value));
+		        
+//		        log.info(listValue.toString());
+		        
+		        if(listValue.get(3).contains("total reviews") && listValue.get(2).contains("(")) {
+		        		listValue.remove(2);
+		        		listValue.remove(3);
+		        }
+		        
+//		        log.info(listValue.toString());
+		        
 		        log.info(
 		            "Product details: Title: {} || Regular price: {} || Sale price: {}",
-		            value[1], value[3], value[5]
+		            listValue.get(1), listValue.get(3), listValue.get(5)
 		        );
 		 }
 		
