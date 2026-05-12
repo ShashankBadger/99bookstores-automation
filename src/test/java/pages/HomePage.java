@@ -1,5 +1,10 @@
 package pages;
 
+/*import java.util.ArrayList;
+import java.util.List;*/
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,11 +12,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+//import utils.ExcelUtil;
+
 
 public class HomePage {
 	
 	WebDriver driver;
 	WebDriverWait wait;
+	static Logger log = LogManager.getLogger(HomePage.class);
 	
 	public HomePage(WebDriver driver, WebDriverWait wait) {
 		this.driver = driver;
@@ -52,6 +60,13 @@ public class HomePage {
     
     @FindBy(id = "HeaderMenu-privacy-policy")
 	WebElement 	PrivacyPolicyTab;
+    
+    @FindBy(xpath = "//li[contains(@class, 'ai')]//a[contains(@href, 'business')]")
+    WebElement BusinessAndFinanceTab;
+    
+    @FindBy(xpath = "//li[contains(@class, 'ai')]//a[contains(@href, 'mythology')]")
+    WebElement MythologyTab;
+    
 
     public boolean isLogoDisplayed() {
         return logo.isDisplayed();
@@ -115,5 +130,27 @@ public class HomePage {
     	  String title = driver.getTitle();
     	  Assert.assertEquals(title, "Privacy policy – 99Bookstore");
     }
-
+    public void businessAndFinanceTab()
+    {
+    	BusinessAndFinanceTab.click();
+    	  String title = driver.getTitle();
+    	  Assert.assertEquals(title, "Business and Finance – 99Bookstore");
+    }
+    public void mythologyTab()
+    {
+    	  MythologyTab.click();
+    	  String title = driver.getTitle();
+    	  Assert.assertEquals(title,"Mythology – 99Bookstore");
+    }
+      
 }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
