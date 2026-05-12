@@ -20,4 +20,7 @@ ehthumbs.db
 node_modules/
 allure-results/
 allure-report/
+Screenshot/
+*.png
+*.jpg
 
