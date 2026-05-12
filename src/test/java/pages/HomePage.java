@@ -1,8 +1,5 @@
 package pages;
 
-/*import java.util.ArrayList;
-import java.util.List;*/
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
-//import utils.ExcelUtil;
-
 
 public class HomePage {
 	
@@ -87,70 +80,40 @@ public class HomePage {
     
     public void verifyProductCategoriesTab() {
     		productCategoriesTab.click();
-    		String title = driver.getTitle();
-    		Assert.assertEquals(title, "Collections – 99Bookstore");	
     }
     
     public void verifyBulkPurchaseTab() {
-		bulkPurchaseTab.click();
-		String title = driver.getTitle();
-		Assert.assertEquals(title, "Bulk Purchase – 99Bookstore");
+		bulkPurchaseTab.click();		
     }
     
     public void verifyAboutUsTab() {
-    	  AboutUsTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "About Us – 99Bookstore");
+    		AboutUsTab.click();    		
     }
     
-    public void verifyReturnAndReplacementTab()
-    {
-    	ReturnAndReplacementTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "Refund policy – 99Bookstore");
+    public void verifyReturnAndReplacementTab() {
+    		ReturnAndReplacementTab.click();    		
     }
     
-    public void verifyContactUsTab()
-    {
-    	ContactUsTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "Contact information – 99Bookstore");
+    public void verifyContactUsTab() {
+    		ContactUsTab.click();    		
     }
     
-    public void verifyTermsAndConditionsTab()
-    {
-    	TermsAndConditionsTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "Terms of service – 99Bookstore");
+    public void verifyTermsAndConditionsTab() {
+    		TermsAndConditionsTab.click();    		
     }
     
-    public void verifyPrivacyPolicyTab()
-    {
-    	PrivacyPolicyTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "Privacy policy – 99Bookstore");
+    public void verifyPrivacyPolicyTab() {
+    		PrivacyPolicyTab.click();    		
     }
-    public void businessAndFinanceTab()
-    {
-    	BusinessAndFinanceTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title, "Business and Finance – 99Bookstore");
+    public void businessAndFinanceTab() {
+    		BusinessAndFinanceTab.click();
     }
-    public void mythologyTab()
-    {
-    	  MythologyTab.click();
-    	  String title = driver.getTitle();
-    	  Assert.assertEquals(title,"Mythology – 99Bookstore");
+    public void mythologyTab() {
+    	  	MythologyTab.click();    	  	
+    }
+    
+    public String getPageTitle() {
+    		return driver.getTitle();
     }
       
-}
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+}  
