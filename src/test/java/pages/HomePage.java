@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,12 @@ public class HomePage extends BasePage{
 	public HomePage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
 	}
+	
+	@FindBy(xpath="//summary[@aria-label='Search']//span")
+	WebElement searchButton;
+	
+	@FindBy(id="Search-In-Modal")
+	WebElement searchBox;
 
 	@FindBy(xpath = "//div[contains(@class, 'logo')]//img[contains(@alt,'99Bookstore')]")
     WebElement logo;
@@ -107,5 +114,11 @@ public class HomePage extends BasePage{
     public void mythologyTab() {
     	  	MythologyTab.click();    	  	
     }
+    
+    public void searchText(String text)
+	{
+		searchButton.click();	
+		searchBox.sendKeys(text,Keys.ENTER);
+	}
     
 }  
