@@ -13,7 +13,6 @@ import pages.HomePage;
 import pages.ProductCategories;
 import utils.ScreenshotUtil;
 
-
 public class HomePageTest extends BaseTest {
 	
 	@Epic("Home Page")
@@ -158,5 +157,4 @@ public class HomePageTest extends BaseTest {
 	    log.info("Mythology tab verification completed successfully.");
 	}
 
-	
 }

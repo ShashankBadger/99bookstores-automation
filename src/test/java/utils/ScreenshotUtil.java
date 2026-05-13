@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtil {
 	
-	static Logger log = LogManager.getLogger(ScreenshotUtil.class);
+	static final Logger log = LogManager.getLogger(ScreenshotUtil.class);
 	
 	public static void captureSceeenshot(WebDriver driver, String folder) {
 		
@@ -28,14 +28,15 @@ public class ScreenshotUtil {
 			
 			FileUtils.copyFile(src, new File(path));
 			
-			log.info("INFO: Screenshot saved at -> {}", path);
+			log.info("Screenshot saved at -> {}", path);
 			
 		} catch (Exception e) {
 			
-			log.error("ERROR: Failed to capture screenshot");
+			log.error("Failed to capture screenshot");
 			e.printStackTrace();
 			
 		}
 	}
+
 }
 

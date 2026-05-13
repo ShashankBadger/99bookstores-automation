@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import io.qameta.allure.Description;
@@ -24,9 +25,17 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Starting test: Verify Product Categories Navigation");
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
+		String title;
 		
 		productCategories.verifyProductCategoriesTab();
+		title = productCategories.getPageTitle();
+		log.info("Navigated to page with title: {}", title);
+		Assert.assertEquals(title, "Collections – 99Bookstore", "Page is not open");
+		
 		productCategories.verifyCollectionListTab();
+		title = productCategories.getPageTitle();
+		log.info("Navigated to page with title: {}", title);
+		Assert.assertEquals(title, "Fiction – 99Bookstore", "Page is not open");
 		
 		log.info("Completed test: Product Categories Navigation verified successfully");
 		
@@ -50,6 +59,9 @@ public class ProductCategoriesTest extends BaseTest {
 		productCategories.verifyAvailabiltyFilterElement();
 		productCategories.verifyInStockFilter();
 		
+		boolean isApplied = productCategories.verifyInStockFilterApply();
+		Assert.assertTrue(isApplied, "In Stock Filter is not applied");
+		
 		log.info("Completed test: In-Stock filter applied and verified successfully");
 
 	}
@@ -70,6 +82,10 @@ public class ProductCategoriesTest extends BaseTest {
 		productCategories.verifyCollectionListTab();
 		
 		productCategories.applyAndValidatePriceFilter(300, 1200);
+		
+		log.info("Validating products are within price range {} to {}", 300, 1200);
+		boolean isBetweenPrice = productCategories.productValidateBasedOnPrice(300, 1200);
+		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
 		
 		log.info("Completed test: Price filter applied and validated successfully");
 	}
@@ -100,8 +116,10 @@ public class ProductCategoriesTest extends BaseTest {
 		
 		productCategories.applyAndValidatePriceFilter(300, 1200);
 		
-		productCategories.clickAndValidateRemoveAllFilter();
-		
+		log.info("Validating products are within price range {} to {}", 300, 1200);
+		boolean isBetweenPrice = productCategories.productValidateBasedOnPrice(300, 1200);
+		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
+				
 		log.info("Completed test: Product category filtering and sorting flow executed successfully");
 	}
 
@@ -125,7 +143,13 @@ public class ProductCategoriesTest extends BaseTest {
 		
 		productCategories.verifyOutOfStockFilter();
 		
-		productCategories.productValidateBasedOutOfStock();
+		boolean isApplied = productCategories.verifyOutStockFilterApply();
+		Assert.assertTrue(isApplied, "Out Stock Filter is not applied");
+		
+		boolean isItContainsSoldOutProd = productCategories.productValidateBasedOutOfStock();
+		
+		log.info("Out-of-stock product validation result: {}", isItContainsSoldOutProd);
+		Assert.assertTrue(isItContainsSoldOutProd, "The list contains in-stock products as well");
 		
 		log.info("Completed test: Out-of-Stock filter applied and validated successfully");
 	}

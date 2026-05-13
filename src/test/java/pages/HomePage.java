@@ -5,21 +5,15 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends BasePage{
 	
-	WebDriver driver;
-	WebDriverWait wait;
-	static Logger log = LogManager.getLogger(HomePage.class);
+	static final Logger log = LogManager.getLogger(HomePage.class);
 	
 	public HomePage(WebDriver driver, WebDriverWait wait) {
-		this.driver = driver;
-		this.wait = wait;
-		PageFactory.initElements(driver, this);
+		super(driver, wait);
 	}
-	
 
 	@FindBy(xpath = "//div[contains(@class, 'logo')]//img[contains(@alt,'99Bookstore')]")
     WebElement logo;
@@ -105,15 +99,13 @@ public class HomePage {
     public void verifyPrivacyPolicyTab() {
     		PrivacyPolicyTab.click();    		
     }
+    
     public void businessAndFinanceTab() {
     		BusinessAndFinanceTab.click();
     }
+    
     public void mythologyTab() {
     	  	MythologyTab.click();    	  	
     }
     
-    public String getPageTitle() {
-    		return driver.getTitle();
-    }
-      
 }  
