@@ -1,4 +1,4 @@
-package pages;
+package pages; 
 
 import java.util.List;
 
@@ -12,10 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchInput extends BasePage
 {
-	private WebDriver driver;
-	private static WebDriverWait wait;
 	private String firstProductName;
 	private String secondProductName;
+	
+	public SearchInput(WebDriver driver, WebDriverWait wait) {
+		super(driver, wait);
+	}
 	
 //	------------------ Product result page ------------------
 	@FindBy(xpath="//div[@id='ProductGridContainer']")
@@ -44,11 +46,6 @@ public class SearchInput extends BasePage
     
     @FindBy(xpath = "//div[@class='totals']//p")
     private WebElement totalPriceText;
-    
-    public SearchInput(WebDriver driver, WebDriverWait wait)
-	{
-		super(driver, wait);
-	}
     
     public boolean hasSearchResults()
     {
