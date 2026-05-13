@@ -13,6 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 
 public class ScreenshotUtil
 {
@@ -48,7 +49,7 @@ public class ScreenshotUtil
 		try
 		{
 			byte[] scrbytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-			Allure.addAttachment(name, "image/png", new ByteArrayInputStream(scrbytes),".png");
+			Allure.addAttachment(name, "image/png", new ByteArrayInputStream(scrbytes),"png");
 			
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -56,5 +57,9 @@ public class ScreenshotUtil
 		}
 		
 	}
+	
+	@Attachment(value = "{name}", type = "image/png")
+	public static byte[] addScreenshotAllure(WebDriver driver, String name) {
+		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	}
 }
-

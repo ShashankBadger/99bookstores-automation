@@ -11,7 +11,8 @@ public class TestListener implements ITestListener
 	public void onTestSuccess(ITestResult result)
 	{
 		// Take screenshot on SUCCESS
-	    ScreenshotUtil.captureSceeenshot(BaseTest.getDriver(),"PASS");	    
+	    ScreenshotUtil.captureSceeenshot(BaseTest.getDriver(),"PASS");
+	    
     }
 
 	@Override
@@ -19,6 +20,7 @@ public class TestListener implements ITestListener
     {
         // Take screenshot on FAILURE
 		 ScreenshotUtil.captureSceeenshot(BaseTest.getDriver(),"FAIL");
+		 
     }
 
 }

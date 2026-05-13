@@ -40,8 +40,8 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(homePage.isCartIconDisplayed());
         log.info("Verified cart icon is displayed");
         
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
-
+        ScreenshotUtil.captureScreenshotForAllure(driver, "Home page Element");
+        
         log.info("Home Page validation test completed");
 	}
 	
@@ -58,52 +58,47 @@ public class HomePageTest extends BaseTest {
 
 		log.info("Verifying Product Categories tab...");
         homePage.verifyProductCategoriesTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Collections – 99Bookstore");	
         log.info("Product Categories tab verified successfully.");
 
         log.info("Verifying Bulk Purchase tab...");
         homePage.verifyBulkPurchaseTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Bulk Purchase – 99Bookstore");
         log.info("Bulk Purchase tab verified successfully.");
 
         log.info("Verifying About Us tab...");
         homePage.verifyAboutUsTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "About Us – 99Bookstore");
         log.info("About Us tab verified successfully.");
 
         log.info("Verifying Return and Replacement tab...");
         homePage.verifyReturnAndReplacementTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Refund policy – 99Bookstore");
         log.info("Return and Replacement tab verified successfully.");
 
         log.info("Verifying Contact Us tab...");
         homePage.verifyContactUsTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Contact information – 99Bookstore");
         log.info("Contact Us tab verified successfully.");
 
         log.info("Verifying Terms and Conditions tab...");
         homePage.verifyTermsAndConditionsTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Terms of service – 99Bookstore");
         log.info("Terms and Conditions tab verified successfully.");
 
         log.info("Verifying Privacy Policy tab...");
         homePage.verifyPrivacyPolicyTab();
-        ScreenshotUtil.captureSceeenshot(driver, "Home");
         title = homePage.getPageTitle();
         Assert.assertEquals(title, "Privacy policy – 99Bookstore");
         log.info("Privacy Policy tab verified successfully.");
+        
+        ScreenshotUtil.captureScreenshotForAllure(driver, "Home page All navigation Tab");
 
         log.info("All navigation menu items verified successfully.");
 	}
@@ -127,8 +122,9 @@ public class HomePageTest extends BaseTest {
 
 	    productCategories.getProductListDetails();
 	    log.info("Retrieved product list details for Business & Finance category.");
+	    
+	    ScreenshotUtil.captureScreenshotForAllure(driver, "Business And Finance");
 
-	    ScreenshotUtil.captureSceeenshot(driver,"Business And Finance");
 	    log.info("Business & Finance tab verification completed successfully.");
 	}
 
@@ -152,8 +148,9 @@ public class HomePageTest extends BaseTest {
 
 	    productCategories.getProductListDetails();
 	    log.info("Retrieved product list details for Mythology category.");
+	    
+	    ScreenshotUtil.captureScreenshotForAllure(driver, "Mythology");
 
-	    ScreenshotUtil.captureSceeenshot(driver, "Mythology");
 	    log.info("Mythology tab verification completed successfully.");
 	}
 

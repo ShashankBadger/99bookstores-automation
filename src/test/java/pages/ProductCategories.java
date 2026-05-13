@@ -14,8 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utils.ScreenshotUtil;
-
 public class ProductCategories extends BasePage {
 
 	static final Logger log = LogManager.getLogger(ProductCategories.class);
@@ -81,9 +79,7 @@ public class ProductCategories extends BasePage {
 		js.executeScript("arguments[0].scrollIntoView(true)", fictionTab);
 		
 		wait.until(ExpectedConditions.elementToBeClickable(fictionTab)).click();
-		
-		ScreenshotUtil.captureSceeenshot(driver, "ProductCategories");		
-		
+				
 	}
 	
 	public void verifyAvailabiltyFilterElement() {
@@ -116,9 +112,7 @@ public class ProductCategories extends BasePage {
 		String updatedUrl = currentUrl + "sort_by=price-descending";
 		
 		driver.get(updatedUrl);
-		
-		ScreenshotUtil.captureSceeenshot(driver, "ProductCategories");
-		
+				
 		log.info("Sorting applied successfully");
 	    
 	}
@@ -156,9 +150,7 @@ public class ProductCategories extends BasePage {
 		
 		log.info("Entering maximum price: {}", +highPrice);
 		wait.until(ExpectedConditions.visibilityOf(filterPriceLTEElement)).sendKeys(""+highPrice);
-		
-		ScreenshotUtil.captureSceeenshot(driver, "ProductCategories");
-				
+						
 		log.info("Price range filter validation completed successfully");
 	}
 	

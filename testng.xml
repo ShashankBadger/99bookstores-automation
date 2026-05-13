@@ -3,13 +3,15 @@
 <suite name="99BookstoresAutomationSuite">
 	<listeners>
 	    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+	    <listener class-name="utils.TestListener" />
 	</listeners>
   <test thread-count="5" name="99BookstoresAutomationTest">
     <classes>  
       
       <class name="tests.HomePageTest"/>
       <class name="tests.ProductCategoriesTest"/>
-      
+      <class name="tests.SearchBookTest" />
+
     </classes>
   </test> <!-- 99BookstoresAutomationTest -->
 </suite> <!-- 99BookstoresAutomationSuite -->

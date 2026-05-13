@@ -10,6 +10,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import pages.ProductCategories;
+import utils.ScreenshotUtil;
 
 public class ProductCategoriesTest extends BaseTest {
 	
@@ -37,6 +38,8 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Navigated to page with title: {}", title);
 		Assert.assertEquals(title, "Fiction – 99Bookstore", "Page is not open");
 		
+		ScreenshotUtil.captureScreenshotForAllure(driver, "Product Categories Navigation");
+		
 		log.info("Completed test: Product Categories Navigation verified successfully");
 		
 	}
@@ -62,6 +65,8 @@ public class ProductCategoriesTest extends BaseTest {
 		boolean isApplied = productCategories.verifyInStockFilterApply();
 		Assert.assertTrue(isApplied, "In Stock Filter is not applied");
 		
+		ScreenshotUtil.captureScreenshotForAllure(driver, "In Stock Filter");
+		
 		log.info("Completed test: In-Stock filter applied and verified successfully");
 
 	}
@@ -86,6 +91,8 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Validating products are within price range {} to {}", 300, 1200);
 		boolean isBetweenPrice = productCategories.productValidateBasedOnPrice(300, 1200);
 		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
+		
+		ScreenshotUtil.captureScreenshotForAllure(driver, "Price Filter");
 		
 		log.info("Completed test: Price filter applied and validated successfully");
 	}
@@ -119,6 +126,8 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Validating products are within price range {} to {}", 300, 1200);
 		boolean isBetweenPrice = productCategories.productValidateBasedOnPrice(300, 1200);
 		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
+		
+		ScreenshotUtil.captureScreenshotForAllure(driver, "All Filter is added");
 				
 		log.info("Completed test: Product category filtering and sorting flow executed successfully");
 	}
@@ -150,6 +159,8 @@ public class ProductCategoriesTest extends BaseTest {
 		
 		log.info("Out-of-stock product validation result: {}", isItContainsSoldOutProd);
 		Assert.assertTrue(isItContainsSoldOutProd, "The list contains in-stock products as well");
+		
+		ScreenshotUtil.captureScreenshotForAllure(driver, "Out of Stock Filter");
 		
 		log.info("Completed test: Out-of-Stock filter applied and validated successfully");
 	}
