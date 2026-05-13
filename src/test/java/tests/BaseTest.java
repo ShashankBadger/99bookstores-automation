@@ -8,15 +8,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import utils.Browsers;
 import utils.ConfigReader;
 
+@Listeners(utils.TestListener.class)
 public class BaseTest {
 	
-	WebDriver driver;
-	WebDriverWait wait;
-	protected Logger log;
+
+	protected static WebDriver driver;
+	protected WebDriverWait wait;
+	static Logger log = LogManager.getLogger(BaseTest.class);
 	
 	@BeforeMethod
 	public void setup() {
@@ -43,5 +46,10 @@ public class BaseTest {
 		log.info("Closing browser");
 		driver.quit();
 		
+	}
+	
+	public static WebDriver getDriver()
+	{
+		return driver;
 	}
 }
