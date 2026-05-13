@@ -16,10 +16,12 @@ public class BaseTest {
 	
 	WebDriver driver;
 	WebDriverWait wait;
-	static Logger log = LogManager.getLogger(BaseTest.class);
+	protected Logger log;
 	
 	@BeforeMethod
 	public void setup() {
+		
+		log = LogManager.getLogger(this.getClass());
 		
 		log.info("Launching Chrome browser");
 		
