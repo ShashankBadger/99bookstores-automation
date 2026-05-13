@@ -114,11 +114,12 @@ public class HomePage extends BasePage{
     public void mythologyTab() {
     	  	MythologyTab.click();    	  	
     }
-    
-    public void searchText(String text)
+    		
+	public void searchText(String text)
 	{
 		searchButton.click();	
 		searchBox.sendKeys(text,Keys.ENTER);
 	}
-    
-}  
+
+}
+
