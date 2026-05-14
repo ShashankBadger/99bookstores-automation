@@ -4,8 +4,9 @@
 	<listeners>
 	    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
 	    <listener class-name="utils.TestListener" />
+	    <!--   <listener class-name="utils.ExtentReportManager" /> -->
 	</listeners>
-  <test thread-count="5" name="99BookstoresAutomationTest">
+  <test name="99BookstoresAutomationTest">
     <classes>  
       
       <class name="tests.HomePageTest"/>

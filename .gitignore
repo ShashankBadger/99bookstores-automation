@@ -23,4 +23,6 @@ allure-report/
 Screenshot/
 *.png
 *.jpg
+reports/
+src/test/java/utils/ExtentReportManager.java
 
