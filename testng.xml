@@ -9,6 +9,7 @@
     <classes>  
       
       <class name="tests.HomePageTest"/>
+      <class name="tests.CartSearchAddProductTest"/>
       <class name="tests.ProductCategoriesTest"/>
       <class name="tests.SearchBookTest" />
 

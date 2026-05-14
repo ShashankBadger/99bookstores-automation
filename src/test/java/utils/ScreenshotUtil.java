@@ -42,6 +42,23 @@ public class ScreenshotUtil
 			e.getMessage();
 		}
 	}
+	// Corrected method name and added 'fileName' parameter
+	public static void captureScreenshot(WebDriver driver, String folder, String fileName) {
+	    try {
+	        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+	    
+	        // Using the fileName parameter provided in the test
+	        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+	        String path = "Screenshot/" + folder + "/" + fileName + "_" + timeStamp + ".png";
+	        
+	        File dest = new File(path);
+	        FileUtils.copyFile(src, dest);
+	        
+	        log.info("Screenshot saved at --> " + path);
+	    } catch (Exception e) {
+	        log.warn("Failed to capture screenshot: " + e.getMessage());
+	    }
+	}
 	
 	
 	public static void captureScreenshotForAllure(WebDriver driver, String name) 
