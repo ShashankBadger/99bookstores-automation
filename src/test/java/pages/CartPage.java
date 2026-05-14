@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,24 +12,29 @@ public class CartPage extends BasePage{
     public CartPage(WebDriver driver, WebDriverWait wait) {
        super(driver, wait);
     }
+    
+    @FindBy(id = "cart-icon-bubble")
+    WebElement cartIcon;
 
-    private By cartIcon =
-            By.id("cart-icon-bubble");
+    @FindBy(id = "CartDrawer-CartItems")
+    WebElement cartItemsContainer;
 
-    private By cartItemsContainer =
-            By.id("CartDrawer-CartItems");
+    @FindBy(xpath = "//a[normalize-space()='Continue shopping']")
+    WebElement continueShoppingBtn;
 
-    private By continueShoppingBtn =
-            By.xpath("//a[normalize-space()='Continue shopping']");
+//    @FindBy(xpath = "//tr[contains(@id,'CartDrawer-Item')]//input")
+//    WebElement quantityInput;
+    By quantityInput = By.xpath("//tr[contains(@id,'CartDrawer-Item')]//input");
+    
 
-    private By quantityInput =
-            By.xpath("//tr[contains(@id,'CartDrawer-Item')]//input");
+    @FindBy(xpath = "//tr[contains(@id,'CartDrawer-Item')]//button[@name='plus']")
+    WebElement plusButton;
 
-    private By plusButton =
-            By.xpath("//tr[contains(@id,'CartDrawer-Item')]//button[@name='plus']");
-
-    private By minusButton =
-            By.xpath("//tr[contains(@id,'CartDrawer-Item')]//button[@name='minus']");
+    @FindBy(xpath = "//tr[contains(@id,'CartDrawer-Item')]//button[@name='minus']")
+    WebElement minusButton;
+    
+    @FindBy(css = ".cart-item__price-wrapper .price--end")
+    WebElement totalPriceLocator;
 
     public void openCart() {
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
@@ -36,7 +42,7 @@ public class CartPage extends BasePage{
 
     public boolean isCartDisplayed() {
         return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(cartItemsContainer)
+                ExpectedConditions.visibilityOf(cartItemsContainer)
         ).isDisplayed();
     }
 
@@ -54,23 +60,16 @@ public class CartPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(minusButton)).click();
     }
 
-    /* =======================
-       NAVIGATION ACTIONS
-       ======================= */
-
-    /** ✅ CART → PRODUCT PAGE */
     public void continueShoppingFromCart() {
         wait.until(ExpectedConditions.elementToBeClickable(continueShoppingBtn)).click();
         
-        //wait.until(ExpectedConditions.urlContains("/products"));
     }
     
     // Inside your CartPage class
-    private By totalPriceLocator = By.cssSelector(".cart-item__price-wrapper .price--end");
 
     public String getTotalPrice() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("loading-overlay")));
-        return driver.findElement(totalPriceLocator).getText().trim();
+        return totalPriceLocator.getText().trim();
     }
     
     public void waitForPriceToUpdate(String oldPrice) {

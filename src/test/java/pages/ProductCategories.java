@@ -21,7 +21,6 @@ public class ProductCategories extends BasePage {
 	public ProductCategories(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
 		log.info("ProductCategories page initia");
-		
 	}
 	
 	@FindBy(id = "HeaderMenu-product-categories")
