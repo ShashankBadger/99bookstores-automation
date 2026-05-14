@@ -2,6 +2,7 @@ package utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,7 +14,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 
 public class ScreenshotUtil
 {
@@ -58,8 +58,20 @@ public class ScreenshotUtil
 		
 	}
 	
-	@Attachment(value = "{name}", type = "image/png")
-	public static byte[] addScreenshotAllure(WebDriver driver, String name) {
-		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	public static String captureScreenshotForExtentReport(WebDriver driver, String tname) throws IOException {
+		
+			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		
+			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+			
+			String path = System.getProperty("user.dir")+"\\Screenshot\\ExtentReport\\"+tname+"_"+timeStamp+".png";
+			
+			File dest = new File(path);
+			
+			FileUtils.copyFile(src, dest);
+			
+			log.info("Screenshot saved at -> " + path);
+			
+			return path;
 	}
 }
