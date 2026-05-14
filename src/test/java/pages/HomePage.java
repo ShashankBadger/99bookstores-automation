@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage{
@@ -15,6 +16,9 @@ public class HomePage extends BasePage{
 	public HomePage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
 	}
+	
+	@FindBy(id = "HeaderMenu-home")
+	WebElement headerMenuHome;
 	
 	@FindBy(xpath="//summary[@aria-label='Search']//span")
 	WebElement searchButton;
@@ -61,7 +65,14 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//li[contains(@class, 'ai')]//a[contains(@href, 'mythology')]")
     WebElement MythologyTab;
     
-
+    @FindBy(className = "drawer__close")
+    WebElement cartClose;
+    
+    
+    public void headerMenuHomeTab() {
+    		headerMenuHome.click();
+    }
+    
     public boolean isLogoDisplayed() {
         return logo.isDisplayed();
     }
@@ -117,8 +128,16 @@ public class HomePage extends BasePage{
     		
 	public void searchText(String text)
 	{
-		searchButton.click();	
+		wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
 		searchBox.sendKeys(text,Keys.ENTER);
+	}
+	
+	public void closeCart() {
+		cartClose.click();
+	}
+	
+	public boolean isCloseCartDisplay() {
+		return cartClose.isDisplayed();
 	}
 
 }

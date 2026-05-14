@@ -13,15 +13,16 @@ import pages.HomePage;
 import pages.ProductCategories;
 import utils.ScreenshotUtil;
 
+@Epic("Home Page")
 public class HomePageTest extends BaseTest {
 	
-	@Epic("Home Page")
+	
 	@Feature("Home Page UI Validation")
 	@Story("Verify important UI elements are visible on Home Page")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that Home Page loads successfully and key UI elements such as logo, search bar, sale banner, and cart icon are displayed correctly.")
-	@Test(priority = 1, enabled = true)
-	public void verifyHomePageElements() {
+	@Test
+	public void t001_verifyHomePageElements() {
 		
 		log.info("Starting Home Page validation test");
 		
@@ -45,13 +46,36 @@ public class HomePageTest extends BaseTest {
         log.info("Home Page validation test completed");
 	}
 	
-	@Epic("Home Page")
+	@Feature("Business & Finance Navigation")
+	@Story("Verify Business & Finance tab navigation")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensures that clicking on the Business & Finance tab loads the correct product category list.")
+	@Test(dependsOnMethods = "t001_verifyHomePageElements")
+	public void t002_verifyBusinessAndFinance() {
+	    log.info("Starting Business & Finance tab verification...");
+
+	    HomePage homePage = new HomePage(driver, wait);
+	    ProductCategories productCategories = new ProductCategories(driver, wait);
+
+	    homePage.businessAndFinanceTab();
+	    String title = homePage.getPageTitle();
+	    Assert.assertEquals(title, "Business and Finance – 99Bookstore");
+	    log.info("Clicked on Business & Finance tab.");
+
+	    productCategories.getProductListDetails();
+	    log.info("Retrieved product list details for Business & Finance category.");
+	    
+	    ScreenshotUtil.captureScreenshotForAllure(driver, "Business And Finance");
+
+	    log.info("Business & Finance tab verification completed successfully.");
+	}
+	
 	@Feature("Home Page UI Validation")
 	@Story("Verify navigation in the 99BookStore")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify that all navigation tabs on the Home Page work correctly.")
-	@Test(priority = 2, enabled = true)
-	public void verifyAllNavigationWorks() {
+	@Test
+	public void t003_verifyAllNavigationWorks() {
 		
 		HomePage homePage = new HomePage(driver, wait);
 		String title;
@@ -101,57 +125,6 @@ public class HomePageTest extends BaseTest {
         ScreenshotUtil.captureScreenshotForAllure(driver, "Home page All navigation Tab");
 
         log.info("All navigation menu items verified successfully.");
-	}
-	
-	@Epic("Home Page")
-	@Feature("Business & Finance Navigation")
-	@Story("Verify Business & Finance tab navigation")
-	@Severity(SeverityLevel.CRITICAL)
-	@Description("Ensures that clicking on the Business & Finance tab loads the correct product category list.")
-	@Test(priority = 2, enabled = true)
-	public void verifyBusinessAndFinance() {
-	    log.info("Starting Business & Finance tab verification...");
-
-	    HomePage homePage = new HomePage(driver, wait);
-	    ProductCategories productCategories = new ProductCategories(driver, wait);
-
-	    homePage.businessAndFinanceTab();
-	    String title = homePage.getPageTitle();
-	    Assert.assertEquals(title, "Business and Finance – 99Bookstore");
-	    log.info("Clicked on Business & Finance tab.");
-
-	    productCategories.getProductListDetails();
-	    log.info("Retrieved product list details for Business & Finance category.");
-	    
-	    ScreenshotUtil.captureScreenshotForAllure(driver, "Business And Finance");
-
-	    log.info("Business & Finance tab verification completed successfully.");
-	}
-
-
-	@Epic("Home Page")
-	@Feature("Mythology Navigation")
-	@Story("Verify Mythology tab navigation")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Ensures that clicking on the Mythology tab loads the correct product category list.")
-	@Test(priority = 2, enabled = true)
-	public void verifyMythology() {
-	    log.info("Starting Mythology tab verification...");
-
-	    ProductCategories productCategories = new ProductCategories(driver, wait);
-	    HomePage homePage = new HomePage(driver, wait);
-
-	    homePage.mythologyTab();
-	    String title = homePage.getPageTitle();
-	    Assert.assertEquals(title,"Mythology – 99Bookstore");
-	    log.info("Clicked on Mythology tab.");
-
-	    productCategories.getProductListDetails();
-	    log.info("Retrieved product list details for Mythology category.");
-	    
-	    ScreenshotUtil.captureScreenshotForAllure(driver, "Mythology");
-
-	    log.info("Mythology tab verification completed successfully.");
 	}
 
 }

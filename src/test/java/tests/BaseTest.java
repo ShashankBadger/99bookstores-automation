@@ -6,8 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
 import utils.Browsers;
@@ -19,10 +19,12 @@ public class BaseTest {
 
 	protected static WebDriver driver;
 	protected WebDriverWait wait;
-	static Logger log = LogManager.getLogger(BaseTest.class);
+	public Logger log;
 	
-	@BeforeMethod
+	@BeforeClass
 	public void setup() {
+		
+		log = LogManager.getLogger(this.getClass());
 		
 		log = LogManager.getLogger(this.getClass());
 		
@@ -40,7 +42,7 @@ public class BaseTest {
 		log.info("Navigated to 99Bookstores home page");
 	}
 	
-	@AfterMethod
+	@AfterClass
 	public void tearDown() {
 		
 		log.info("Closing browser");

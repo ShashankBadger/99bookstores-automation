@@ -32,7 +32,7 @@ public class SearchBookTest extends BaseTest
 		ExcelUtils excel = new ExcelUtils(excelPath, "Search_Input");
 		
 		HomePage home = new HomePage(driver, wait);
-		
+				
 		home.searchText(input);
 		
 		log.info("Book searched with input: {}", input);
@@ -58,6 +58,8 @@ public class SearchBookTest extends BaseTest
 		
 		excel.writeCellData(rowIndex, 4, "Books found for "+input+" as expected");
 		excel.writeCellData(rowIndex, 5, "Pass");
+		
+		
 
 		log.info("Excel updated with PASS status");
 		log.info("=========== END TEST : {} ===========", testCase);
@@ -77,6 +79,13 @@ public class SearchBookTest extends BaseTest
 
 		ExcelUtils excel = new ExcelUtils(excelPath, "Search_Input");
 		HomePage home = new HomePage(driver, wait);
+		
+		if(home.isCloseCartDisplay()) {
+			home.closeCart();
+		}
+		
+		home.headerMenuHomeTab();
+		
 		home.searchText(input);
 		
 		log.info("Search performed with invalid input: {}", input);

@@ -11,17 +11,15 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import pages.ProductCategories;
 import utils.ScreenshotUtil;
-
+@Epic("Product Categories")
 public class ProductCategoriesTest extends BaseTest {
 	
-
-	@Epic("Product Catalog")
 	@Feature("Category Navigation")
 	@Story("Verify user can navigate to Product Categories and open Fiction collection")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verifies that user can open Product Categories page and navigate to Fiction collection successfully.")
-	@Test(priority = 3)
-	public void testVerifyProductCategoriesNavigation() {
+	@Test
+	public void t004_VerifyProductCategoriesNavigation() {
 		
 		log.info("Starting test: Verify Product Categories Navigation");
 		
@@ -44,21 +42,17 @@ public class ProductCategoriesTest extends BaseTest {
 		
 	}
 
-	@Epic("Product Catalog")
 	@Feature("Availability Filter")
 	@Story("Verify user can apply In-Stock filter")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply In-Stock availability filter and view only available products.")
-	@Test(priority = 2)
-	public void testInStockFilter() {
+	@Test(dependsOnMethods = "t004_VerifyProductCategoriesNavigation")
+	public void t005_testInStockFilter() {
 		
 		log.info("Starting test: Verify In-Stock filter functionality");
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
 		
-		productCategories.verifyProductCategoriesTab();
-		productCategories.verifyCollectionListTab();
-
 		productCategories.verifyAvailabiltyFilterElement();
 		productCategories.verifyInStockFilter();
 		
@@ -71,21 +65,17 @@ public class ProductCategoriesTest extends BaseTest {
 
 	}
 
-	@Epic("Product Catalog")
 	@Feature("Price Filter")
 	@Story("Verify user can filter products based on price range")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply price filter and see only products within the selected price range.")
-	@Test(priority = 2)
-	public void testPriceFilterValidation() {
+	@Test(dependsOnMethods = "t005_testInStockFilter")
+	public void t006_testPriceFilterValidation() {
 		
 		log.info("Starting test: Validate price filter functionality");
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
-		
-		productCategories.verifyProductCategoriesTab();
-		productCategories.verifyCollectionListTab();
-		
+				
 		productCategories.applyAndValidatePriceFilter(300, 1200);
 		
 		log.info("Validating products are within price range {} to {}", 300, 1200);
@@ -97,32 +87,21 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Completed test: Price filter applied and validated successfully");
 	}
 
-	@Epic("Product Catalog")
 	@Feature("Category Navigation, Filters and Sorting")
 	@Story("Verify user can navigate to a category, apply availability filter, and sort products by price")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can open Product Categories, navigate to Fiction collection, apply In-Stock availability filter, sort products by Price (High to Low), and view the updated product list.")
-	@Test(priority = 1)
-	public void verifyProductCategoryFilterAndSortFlow() {
+	@Test(dependsOnMethods = "t006_testPriceFilterValidation")
+	public void t007_verifyProductCategoryFilterAndSortFlow() {
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
 		
 		log.info("Starting test: Verify complete product category filter and sorting flow");
 		
-		productCategories.verifyProductCategoriesTab();
-		
-		productCategories.verifyCollectionListTab();
-		
-		productCategories.verifyAvailabiltyFilterElement();
-		
-		productCategories.verifyInStockFilter();
-		
 		productCategories.applySortHighToLowByURL();
 		
 		productCategories.getProductListDetails();
-		
-		productCategories.applyAndValidatePriceFilter(300, 1200);
-		
+				
 		log.info("Validating products are within price range {} to {}", 300, 1200);
 		boolean isBetweenPrice = productCategories.productValidateBasedOnPrice(300, 1200);
 		Assert.assertTrue(isBetweenPrice, "One or more products are outside the selected price range");
@@ -132,13 +111,12 @@ public class ProductCategoriesTest extends BaseTest {
 		log.info("Completed test: Product category filtering and sorting flow executed successfully");
 	}
 
-	@Epic("Product Catalog")
 	@Feature("Availability Filter")
 	@Story("Verify user can apply Out-of-Stock filter")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply Out-of-Stock filter and view only products marked as Sold Out.")
-	@Test(priority = 2)
-	public void testOutOfStockFilterValidation() {
+	@Test
+	public void t008_testOutOfStockFilterValidation() {
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
 		

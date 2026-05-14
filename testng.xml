@@ -4,15 +4,14 @@
 	<listeners>
 	    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
 	    <listener class-name="utils.TestListener" />
-	    <!--   <listener class-name="utils.ExtentReportManager" /> -->
+	    <listener class-name="utils.ExtentReportManager" />
 	</listeners>
   <test name="99BookstoresAutomationTest">
     <classes>  
-      
       <class name="tests.HomePageTest"/>
+      <class name="tests.CartSearchAddProductTest"/>
       <class name="tests.ProductCategoriesTest"/>
       <class name="tests.SearchBookTest" />
-
     </classes>
   </test> <!-- 99BookstoresAutomationTest -->
 </suite> <!-- 99BookstoresAutomationSuite -->
