@@ -16,13 +16,14 @@ import utils.ScreenshotUtil;
 @Epic("Home Page")
 public class HomePageTest extends BaseTest {
 	
-	
 	@Feature("Home Page UI Validation")
 	@Story("Verify important UI elements are visible on Home Page")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that Home Page loads successfully and key UI elements such as logo, search bar, sale banner, and cart icon are displayed correctly.")
 	@Test
-	public void t001_verifyHomePageElements() {
+	public void tc001_verifyHomePageElements() {
+		
+		log.info("=========== START TEST ============");
 		
 		log.info("Starting Home Page validation test");
 		
@@ -44,14 +45,19 @@ public class HomePageTest extends BaseTest {
         ScreenshotUtil.captureScreenshotForAllure(driver, "Home page Element");
         
         log.info("Home Page validation test completed");
+        
+        log.info("=========== END TEST ============");
 	}
 	
 	@Feature("Business & Finance Navigation")
 	@Story("Verify Business & Finance tab navigation")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Ensures that clicking on the Business & Finance tab loads the correct product category list.")
-	@Test(dependsOnMethods = "t001_verifyHomePageElements")
-	public void t002_verifyBusinessAndFinance() {
+	@Test(dependsOnMethods = "tc001_verifyHomePageElements")
+	public void tc002_verifyBusinessAndFinance() {
+		
+		log.info("=========== START TEST ============");
+		
 	    log.info("Starting Business & Finance tab verification...");
 
 	    HomePage homePage = new HomePage(driver, wait);
@@ -68,6 +74,8 @@ public class HomePageTest extends BaseTest {
 	    ScreenshotUtil.captureScreenshotForAllure(driver, "Business And Finance");
 
 	    log.info("Business & Finance tab verification completed successfully.");
+	    
+	    log.info("=========== END TEST ============");
 	}
 	
 	@Feature("Home Page UI Validation")
@@ -75,7 +83,9 @@ public class HomePageTest extends BaseTest {
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify that all navigation tabs on the Home Page work correctly.")
 	@Test
-	public void t003_verifyAllNavigationWorks() {
+	public void tc003_verifyAllNavigationWorks() {
+		
+		log.info("=========== START TEST ============");
 		
 		HomePage homePage = new HomePage(driver, wait);
 		String title;
@@ -125,6 +135,8 @@ public class HomePageTest extends BaseTest {
         ScreenshotUtil.captureScreenshotForAllure(driver, "Home page All navigation Tab");
 
         log.info("All navigation menu items verified successfully.");
+        
+        log.info("=========== END TEST ============");
 	}
 
 }

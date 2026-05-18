@@ -31,12 +31,12 @@ public class SearchPage extends BasePage {
 
     public WebElement getFirstProductCard() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("loading-overlay")));
-        System.out.println("Search results loaded, looking for first product...");
+        log.info("Search results loaded, looking for first product...");
 		List<WebElement> allLinks = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
 			    By.cssSelector("#product-grid li:first-child .full-unstyled-link")
 			));
 		WebElement targetElement = allLinks.get(1);
-        System.out.println("First product found: " + targetElement.getText());
+        log.info("First product found: " + targetElement.getText());
         return targetElement;
     }
 }

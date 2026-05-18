@@ -62,7 +62,6 @@ public class SearchInput extends BasePage
 	public void listOutProducts()
 	{
 		
-//		WebElement container = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='ProductGridContainer']")));
 		wait.until(ExpectedConditions.visibilityOf(productContainer));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", productContainer);
 	}
@@ -85,10 +84,8 @@ public class SearchInput extends BasePage
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", product);
 		addToCart.click();
 		
-//		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CartDrawer-Overlay")));
 		wait.until(ExpectedConditions.visibilityOf(cartDrawerOverlay));
         
-//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='drawer__close']"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(drawerCloseButton)).click();
 		
 		driver.navigate().back();
@@ -96,7 +93,6 @@ public class SearchInput extends BasePage
 	
 	public void addQuantityOfBooks(int quantity)
 	{
-//		WebElement cartIcon = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cart-icon-bubble")));
 		wait.until(ExpectedConditions.visibilityOf(cartIcon));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartIcon);
 		

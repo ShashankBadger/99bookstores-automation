@@ -25,9 +25,7 @@ public class BaseTest {
 	public void setup() {
 		
 		log = LogManager.getLogger(this.getClass());
-		
-		log = LogManager.getLogger(this.getClass());
-		
+				
 		log.info("Launching Chrome browser");
 		
 		driver = Browsers.getDriver("browser");

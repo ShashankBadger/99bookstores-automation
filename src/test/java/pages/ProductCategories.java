@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductCategories extends BasePage {
-
-	static final Logger log = LogManager.getLogger(ProductCategories.class);
 	
 	public ProductCategories(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
-		log.info("ProductCategories page initia");
 	}
 	
 	@FindBy(id = "HeaderMenu-product-categories")

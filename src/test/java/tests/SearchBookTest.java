@@ -23,7 +23,7 @@ public class SearchBookTest extends BaseTest
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify books are displayed and verifies the total price for the items in cart.")
 	@Test(priority = 1, dataProvider = "validSearchData", dataProviderClass = utils.ExcelDataProvider.class)
-	public void searchUsingValidText(int rowIndex, String testCase, String input, String expectedResult, String excelPath)
+	public void tc013_searchUsingValidText(int rowIndex, String testCase, String input, String expectedResult, String excelPath)
 	{
 
 		 log.info("=========== START TEST : {} ===========", testCase);
@@ -62,9 +62,9 @@ public class SearchBookTest extends BaseTest
 		
 
 		log.info("Excel updated with PASS status");
-		log.info("=========== END TEST : {} ===========", testCase);
-		
 		ScreenshotUtil.captureScreenshotForAllure(driver, "Success Result For Valid text");
+		
+		log.info("=========== END TEST : {} ===========", testCase);
 
 	}
 	
@@ -72,7 +72,7 @@ public class SearchBookTest extends BaseTest
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify that no books are displayed for invalid search.")
 	@Test(priority = 2, dataProvider = "invalidSearchData", dataProviderClass = utils.ExcelDataProvider.class)
-	public void searchUsingInvalidText(int rowIndex, String testCase, String input, String expectedResult, String excelPath)
+	public void tc013_searchUsingInvalidText(int rowIndex, String testCase, String input, String expectedResult, String excelPath)
 	{
 		log.info("=========== START TEST : {} ===========", testCase);
 		log.info("Search input received (invalid): {}", input);
@@ -98,9 +98,9 @@ public class SearchBookTest extends BaseTest
 		excel.writeCellData(rowIndex, 5, "Pass");
 
         log.info("Excel updated with PASS status for invalid search");
-        log.info("=========== END TEST : {} ===========", testCase);
-        
         ScreenshotUtil.captureScreenshotForAllure(driver, "Success Result For Invalid text");
+        
+        log.info("=========== END TEST : {} ===========", testCase);
 
 	}
 }

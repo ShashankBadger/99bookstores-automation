@@ -22,11 +22,7 @@ public class CartPage extends BasePage{
     @FindBy(xpath = "//a[normalize-space()='Continue shopping']")
     WebElement continueShoppingBtn;
 
-//    @FindBy(xpath = "//tr[contains(@id,'CartDrawer-Item')]//input")
-//    WebElement quantityInput;
-    By quantityInput = By.xpath("//tr[contains(@id,'CartDrawer-Item')]//input");
     
-
     @FindBy(xpath = "//tr[contains(@id,'CartDrawer-Item')]//button[@name='plus']")
     WebElement plusButton;
 
@@ -35,6 +31,8 @@ public class CartPage extends BasePage{
     
     @FindBy(css = ".cart-item__price-wrapper .price--end")
     WebElement totalPriceLocator;
+
+    By quantityInput = By.xpath("//tr[contains(@id,'CartDrawer-Item')]//input");
 
     public void openCart() {
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
@@ -65,8 +63,6 @@ public class CartPage extends BasePage{
         
     }
     
-    // Inside your CartPage class
-
     public String getTotalPrice() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("loading-overlay")));
         return totalPriceLocator.getText().trim();

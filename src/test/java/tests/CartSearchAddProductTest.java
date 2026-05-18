@@ -17,7 +17,10 @@ public class CartSearchAddProductTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verified that a user can search for a specific book and click on the result to open the product page.")
     @Test
-    public void t009_testSearchAndSelectProduct() {
+    public void tc004_testSearchAndSelectProduct() {
+    	
+    		log.info("=========== START TEST ============");
+    		
         log.info("Starting Search and Select Product test");
         
         SearchPage searchPage = new SearchPage(driver, wait);
@@ -41,15 +44,21 @@ public class CartSearchAddProductTest extends BaseTest {
         
         firstProduct.click();
         log.info("Product clicked and navigating to Product Page");
-        ScreenshotUtil.captureScreenshot(driver, "Search", "product_selected");
+
+        ScreenshotUtil.captureScreenshotForAllure(driver, "Add product to cart and verify visibility");
+        
+        log.info("=========== END TEST ============");
     }
 
     @Story("Add product to cart and verify visibility")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verifies that the selected product can be added to the cart and is visible in the cart drawer.")
-    @Test(dependsOnMethods = "t009_testSearchAndSelectProduct")
-    public void t010_testAddToCart() {
-        log.info("Starting Add to Cart validation");
+    @Test(dependsOnMethods = "tc004_testSearchAndSelectProduct")
+    public void tc005_testAddToCart() {
+    		
+    		log.info("=========== START TEST ============");
+        
+    		log.info("Starting Add to Cart validation");
         
         ProductPage productPage = new ProductPage(driver, wait);
         CartPage cartPage = new CartPage(driver, wait);
@@ -63,15 +72,21 @@ public class CartSearchAddProductTest extends BaseTest {
         cartPage.openCart();
         Assert.assertTrue(cartPage.isCartDisplayed(), " Cart items not visible");
         log.info("Product successfully added and verified in cart");
-        ScreenshotUtil.captureScreenshot(driver, "Cart", "item_added");
+        
+        ScreenshotUtil.captureScreenshotForAllure(driver, "Modify product quantity in cart");
+        
+        log.info("=========== END TEST ============");
     }
 
     @Story("Modify product quantity in cart")
     @Severity(SeverityLevel.NORMAL)
     @Description("Validates that increasing and decreasing product quantity in the cart updates the values correctly.")
-    @Test(dependsOnMethods = "t010_testAddToCart")
-    public void t011_testUpdateQuantityInCart() throws InterruptedException {
-        log.info("Starting Quantity Increase/Decrease test");
+    @Test(dependsOnMethods = "tc005_testAddToCart")
+    public void tc006_testUpdateQuantityInCart() throws InterruptedException {
+    		
+    		log.info("=========== START TEST ============");
+        
+    		log.info("Starting Quantity Increase/Decrease test");
         
         CartPage cartPage = new CartPage(driver, wait);
 
@@ -100,6 +115,9 @@ public class CartSearchAddProductTest extends BaseTest {
         Assert.assertEquals(decreasedQty, initialQty, " Quantity did not decrease correctly");
 
         log.info("Quantity modification validated successfully");
-        ScreenshotUtil.captureScreenshot(driver, "Cart", "quantity_updated");
+        
+        ScreenshotUtil.captureScreenshotForAllure(driver, "Search for a product and navigate to product details");
+        
+        log.info("=========== END TEST ============");
     }
 }

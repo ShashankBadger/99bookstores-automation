@@ -17,7 +17,6 @@ public class ProductPage extends BasePage {
     
     @FindBy(xpath = "//button[contains(@id,'ProductSubmitButton')]")
     WebElement addToCartButton;
-//    private By addToCartButton = By.xpath("//button[contains(@id,'ProductSubmitButton')]");
 
     public String getProductTitle() {
         WebElement title = wait.until(ExpectedConditions.visibilityOf(productTitle));

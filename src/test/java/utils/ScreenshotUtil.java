@@ -56,7 +56,7 @@ public class ScreenshotUtil
 	        
 	        log.info("Screenshot saved at --> " + path);
 	    } catch (Exception e) {
-	        log.warn("Failed to capture screenshot: " + e.getMessage());
+	        log.error("Failed to capture screenshot: " + e.getMessage());
 	    }
 	}
 	
@@ -69,7 +69,6 @@ public class ScreenshotUtil
 			Allure.addAttachment(name, "image/png", new ByteArrayInputStream(scrbytes),"png");
 			
 		}catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("Failure to load: "+e.getMessage());
 		}
 		
@@ -86,9 +85,7 @@ public class ScreenshotUtil
 			File dest = new File(path);
 			
 			FileUtils.copyFile(src, dest);
-			
-			log.info("Screenshot saved at -> " + path);
-			
+						
 			return path;
 	}
 }

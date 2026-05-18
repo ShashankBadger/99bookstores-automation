@@ -19,7 +19,9 @@ public class ProductCategoriesTest extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verifies that user can open Product Categories page and navigate to Fiction collection successfully.")
 	@Test
-	public void t004_VerifyProductCategoriesNavigation() {
+	public void tc007_VerifyProductCategoriesNavigation() {
+		
+		log.info("=========== START TEST ============");
 		
 		log.info("Starting test: Verify Product Categories Navigation");
 		
@@ -40,14 +42,18 @@ public class ProductCategoriesTest extends BaseTest {
 		
 		log.info("Completed test: Product Categories Navigation verified successfully");
 		
+		log.info("=========== END TEST ============");
+		
 	}
 
 	@Feature("Availability Filter")
 	@Story("Verify user can apply In-Stock filter")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply In-Stock availability filter and view only available products.")
-	@Test(dependsOnMethods = "t004_VerifyProductCategoriesNavigation")
-	public void t005_testInStockFilter() {
+	@Test(dependsOnMethods = "tc007_VerifyProductCategoriesNavigation")
+	public void tc008_testInStockFilter() {
+		
+		log.info("=========== START TEST ============");
 		
 		log.info("Starting test: Verify In-Stock filter functionality");
 		
@@ -62,6 +68,8 @@ public class ProductCategoriesTest extends BaseTest {
 		ScreenshotUtil.captureScreenshotForAllure(driver, "In Stock Filter");
 		
 		log.info("Completed test: In-Stock filter applied and verified successfully");
+		
+		log.info("=========== END TEST ============");
 
 	}
 
@@ -69,8 +77,10 @@ public class ProductCategoriesTest extends BaseTest {
 	@Story("Verify user can filter products based on price range")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply price filter and see only products within the selected price range.")
-	@Test(dependsOnMethods = "t005_testInStockFilter")
-	public void t006_testPriceFilterValidation() {
+	@Test(dependsOnMethods = "tc008_testInStockFilter")
+	public void tc009_testPriceFilterValidation() {
+		
+		log.info("=========== START TEST ============");
 		
 		log.info("Starting test: Validate price filter functionality");
 		
@@ -85,14 +95,18 @@ public class ProductCategoriesTest extends BaseTest {
 		ScreenshotUtil.captureScreenshotForAllure(driver, "Price Filter");
 		
 		log.info("Completed test: Price filter applied and validated successfully");
+		
+		log.info("=========== END TEST ============");
 	}
 
 	@Feature("Category Navigation, Filters and Sorting")
 	@Story("Verify user can navigate to a category, apply availability filter, and sort products by price")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can open Product Categories, navigate to Fiction collection, apply In-Stock availability filter, sort products by Price (High to Low), and view the updated product list.")
-	@Test(dependsOnMethods = "t006_testPriceFilterValidation")
-	public void t007_verifyProductCategoryFilterAndSortFlow() {
+	@Test(dependsOnMethods = "tc009_testPriceFilterValidation")
+	public void tc010_verifyProductCategoryFilterAndSortFlow() {
+		
+		log.info("=========== START TEST ============");
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
 		
@@ -109,6 +123,8 @@ public class ProductCategoriesTest extends BaseTest {
 		ScreenshotUtil.captureScreenshotForAllure(driver, "All Filter is added");
 				
 		log.info("Completed test: Product category filtering and sorting flow executed successfully");
+		
+		log.info("=========== END TEST ============");
 	}
 
 	@Feature("Availability Filter")
@@ -116,7 +132,9 @@ public class ProductCategoriesTest extends BaseTest {
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verifies that user can apply Out-of-Stock filter and view only products marked as Sold Out.")
 	@Test
-	public void t008_testOutOfStockFilterValidation() {
+	public void tc011_testOutOfStockFilterValidation() {
+		
+		log.info("=========== START TEST ============");
 		
 		ProductCategories productCategories = new ProductCategories(driver, wait);
 		
@@ -141,6 +159,8 @@ public class ProductCategoriesTest extends BaseTest {
 		ScreenshotUtil.captureScreenshotForAllure(driver, "Out of Stock Filter");
 		
 		log.info("Completed test: Out-of-Stock filter applied and validated successfully");
+		
+		log.info("=========== END TEST ============");
 	}
 
 }
