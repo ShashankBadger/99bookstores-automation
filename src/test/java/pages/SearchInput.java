@@ -83,10 +83,21 @@ public class SearchInput extends BasePage
 	{
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", product);
 		addToCart.click();
+		        		
+
+		By overlayLocator = By.id("CartDrawer-Overlay");
 		
-		wait.until(ExpectedConditions.visibilityOf(cartDrawerOverlay));
-        
-		wait.until(ExpectedConditions.elementToBeClickable(drawerCloseButton)).click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(
+		    By.className("loading-overlay")
+		));
+		
+		// Now safely re-fetch element
+		WebElement overlay = wait.until(
+		    ExpectedConditions.visibilityOfElementLocated(overlayLocator)
+		);
+		
+		overlay.click();
+
 		
 		driver.navigate().back();
 	}
